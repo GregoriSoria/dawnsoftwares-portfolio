@@ -1,0 +1,20 @@
+{
+  "name": "dkgame",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "lint": "tsc --noEmit",
+    "ship": "rm -rf dist && parcel build index.html && surge --domain https://dungeon-dash.surge.sh dist && rm -rf dist"
+  },
+  "author": "Michael Pearson & Others",
+  "license": "MIT",
+  "dependencies": {
+    "dungeon-factory": "^1.0.6",
+    "mrpas": "^1.2.1",
+    "parcel": "^1.9.7",
+    "phaser": "^3.13.0",
+    "typescript": "^3.0.3"
+  }
+}
