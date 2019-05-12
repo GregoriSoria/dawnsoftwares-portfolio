@@ -45,10 +45,31 @@ export default {
     height: 32,
     file: Link,
     animations: {
-      idle: {
-        name: "playerIdle",
+      idleLeft: {
+        name: "playerIdleLeft",
         start: 0x00,
         end: 0x00,
+        frameRate: 0,
+        repeat: false
+      },
+      idleRight: {
+        name: "playerIdleRight",
+        start: 0x00,
+        end: 0x00,
+        frameRate: 0,
+        repeat: false
+      },
+      idleUp: {
+        name: "playerIdleUp",
+        start: 0x01,
+        end: 0x01,
+        frameRate: 0,
+        repeat: false
+      },
+      idleDown: {
+        name: "playerIdleDown",
+        start: 0x02,
+        end: 0x02,
         frameRate: 0,
         repeat: false
       },

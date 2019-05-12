@@ -27,11 +27,13 @@ export default class Player {
   private emitter: Phaser.GameObjects.Particles.ParticleEmitter;
   private body: Phaser.Physics.Arcade.Body;
 
+  private lastPressedArrowKey: any;
+
   constructor(x: number, y: number, scene: Phaser.Scene) {
     this.sprite = scene.physics.add.sprite(x, y, Graphics.player.name, 0);
     this.sprite.setSize(12, 10);
     this.sprite.setOffset(10, 18);
-    this.sprite.anims.play(Graphics.player.animations.idle.name);
+    this.sprite.anims.play(Graphics.player.animations.idleDown.name);
 
     this.keys = scene.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -96,14 +98,37 @@ export default class Player {
     if (left || right) {
       moveAnim = Graphics.player.animations.walkRight.name;
       attackAnim = Graphics.player.animations.slash.name;
+
+      if (keys.left.isDown) {
+        this.lastPressedArrowKey = keys.left;
+      } else {
+        this.lastPressedArrowKey = keys.left;
+      }
     } else if (down) {
       moveAnim = Graphics.player.animations.walkFront.name;
       attackAnim = Graphics.player.animations.slashDown.name;
+      this.lastPressedArrowKey = keys.down;
     } else if (up) {
       moveAnim = Graphics.player.animations.walkBack.name;
       attackAnim = Graphics.player.animations.slashUp.name;
+      this.lastPressedArrowKey = keys.up;
     } else {
-      moveAnim = Graphics.player.animations.idle.name;
+      switch (this.lastPressedArrowKey) {
+        case keys.left:
+          moveAnim = Graphics.player.animations.idleLeft.name;
+          break;
+        case keys.right:
+          moveAnim = Graphics.player.animations.idleRight.name;
+          break;
+        case keys.up:
+          moveAnim = Graphics.player.animations.idleUp.name;
+          break;
+        case keys.down:
+          moveAnim = Graphics.player.animations.idleDown.name;
+          break;
+        default:
+          moveAnim = Graphics.player.animations.idleDown.name;
+      }
     }
 
     if (
