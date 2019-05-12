@@ -9,7 +9,7 @@ const game = new Phaser.Game({
   width: window.innerWidth,
   height: window.innerHeight,
   render: { pixelArt: true },
-  physics: { default: "arcade", arcade: { debug: true, gravity: { y: 0 } } },
+  physics: { default: "arcade", arcade: { debug: false, gravity: { y: 0 } } },
   scene: [DungeonScene, InfoScene, ReferenceScene]
 });
 
@@ -30,3 +30,8 @@ setUpHotReload();
 window.addEventListener("resize", () => {
   game.resize(window.innerWidth, window.innerHeight);
 });
+
+setTimeout(() => {
+  console.clear();
+  console.log('Portfolio | DAWN Sofwares');
+}, 50);
