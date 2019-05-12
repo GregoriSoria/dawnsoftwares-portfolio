@@ -29,8 +29,8 @@ export default class Player {
 
   constructor(x: number, y: number, scene: Phaser.Scene) {
     this.sprite = scene.physics.add.sprite(x, y, Graphics.player.name, 0);
-    this.sprite.setSize(8, 8);
-    this.sprite.setOffset(12, 20);
+    this.sprite.setSize(12, 10);
+    this.sprite.setOffset(10, 18);
     this.sprite.anims.play(Graphics.player.animations.idle.name);
 
     this.keys = scene.input.keyboard.addKeys({
@@ -94,10 +94,10 @@ export default class Player {
     }
 
     if (left || right) {
-      moveAnim = Graphics.player.animations.walk.name;
+      moveAnim = Graphics.player.animations.walkRight.name;
       attackAnim = Graphics.player.animations.slash.name;
     } else if (down) {
-      moveAnim = Graphics.player.animations.walk.name;
+      moveAnim = Graphics.player.animations.walkFront.name;
       attackAnim = Graphics.player.animations.slashDown.name;
     } else if (up) {
       moveAnim = Graphics.player.animations.walkBack.name;
@@ -114,7 +114,7 @@ export default class Player {
       this.attackUntil = time + attackDuration;
       this.attackLockedUntil = time + attackDuration + attackCooldown;
       this.body.velocity.normalize().scale(attackSpeed);
-      this.sprite.anims.play(attackAnim, true);
+      //this.sprite.anims.play(attackAnim, true); // only for RoguePlayer.png
       this.emitter.start();
       this.sprite.setBlendMode(Phaser.BlendModes.ADD);
     } else {

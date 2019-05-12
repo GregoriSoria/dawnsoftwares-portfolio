@@ -9,7 +9,7 @@ const game = new Phaser.Game({
   width: window.innerWidth,
   height: window.innerHeight,
   render: { pixelArt: true },
-  physics: { default: "arcade", arcade: { debug: false, gravity: { y: 0 } } },
+  physics: { default: "arcade", arcade: { debug: true, gravity: { y: 0 } } },
   scene: [DungeonScene, InfoScene, ReferenceScene]
 });
 
@@ -17,7 +17,7 @@ function setUpHotReload() {
   // @ts-ignore
   if (module.hot) {
     // @ts-ignore
-    module.hot.accept(() => {});
+    module.hot.accept(() => { });
     // @ts-ignore
     module.hot.dispose(() => {
       window.location.reload();

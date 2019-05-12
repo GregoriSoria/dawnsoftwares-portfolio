@@ -1,7 +1,7 @@
 import RogueEnvironment from "../../assets/fongoose/RogueEnvironment.png";
-import RoguePlayer from "../../assets/fongoose/RoguePlayer.png";
 import RogueSlime from "../../assets/fongoose/RogueSlime.png";
 import RogueItems from "../../assets/fongoose/RogueItems.png";
+import Link from "../../assets/fongoose/Link.png";
 
 import Util from "../../assets/Util.png";
 
@@ -43,27 +43,34 @@ export default {
     name: "player",
     width: 32,
     height: 32,
-    file: RoguePlayer,
+    file: Link,
     animations: {
       idle: {
         name: "playerIdle",
-        start: 0x01,
-        end: 0x07,
-        frameRate: 6,
-        repeat: true
+        start: 0x00,
+        end: 0x00,
+        frameRate: 0,
+        repeat: false
       },
-      walk: {
-        name: "playerWalk",
+      walkFront: {
+        name: "playerWalkFront",
         start: 0x08,
-        end: 0x0d,
-        frameRate: 10,
+        end: 0x0f,
+        frameRate: 21,
         repeat: true
       },
       walkBack: {
         name: "playerWalkBack",
         start: 0x10,
-        end: 0x15,
-        frameRate: 10,
+        end: 0x17,
+        frameRate: 21,
+        repeat: true
+      },
+      walkRight: {
+        name: "playerWalkRight",
+        start: 0x18,
+        end: 0x1e,
+        frameRate: 21,
         repeat: true
       },
       // Ideally attacks should be five frames at 30fps to
