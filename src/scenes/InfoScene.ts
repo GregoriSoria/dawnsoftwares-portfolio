@@ -7,7 +7,7 @@ export default class InfoScene extends Phaser.Scene {
 
   create(): void {
     const content = [
-      "Portfolio | DAWN Sosftwares!",
+      "Portfolio | DAWN Softwares!",
     ];
     const text = this.add.text(25, 25, content, {
       fontFamily: "sans-serif",
