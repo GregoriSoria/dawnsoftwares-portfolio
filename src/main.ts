@@ -1,3 +1,4 @@
+import { env } from './env';
 import Phaser from "phaser";
 import ReferenceScene from "./scenes/ReferenceScene";
 import DungeonScene from "./scenes/DungeonScene";
@@ -31,7 +32,9 @@ window.addEventListener("resize", () => {
   game.resize(window.innerWidth, window.innerHeight);
 });
 
-setTimeout(() => {
-  console.clear();
-  console.log('Portfolio | DAWN Sofwares');
-}, 50);
+if (env.APP_ENV != 'DEV') {
+  setTimeout(() => {
+    console.clear();
+    console.log('Portfolio | DAWN Sofwares');
+  }, 50);
+}

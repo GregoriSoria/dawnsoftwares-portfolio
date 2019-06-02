@@ -1,20 +1,12 @@
-# Dungeon Dash!
-
-An experiment with making a dungeon crawler with Open Source or public domain assets, using Phaser 3 & Typescript.
-
-Live demo available at https://dungeon-dash.surge.sh
-
-MIT License applies unless otherwise noted.
-
-## Contributing
+## Dev
 
 Get a local instance running with `npm i` and then `npm run start`.
 
 Press `R` in game to see a tilesheet reference, press `R` again to return to the game.
 
-Contributions must be valid typescript & formatted with prettier.js.
+## Figma
 
-Otherwise, go nuts.
+https://www.figma.com/file/dOvMmPERgaoVT7QbXitUpfo7/DAWN-Softwares-%E2%80%93-Portfolio?node-id=43%3A3
 
 ## TODO
 
