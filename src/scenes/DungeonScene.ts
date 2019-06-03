@@ -18,6 +18,7 @@ export default class DungeonScene extends Phaser.Scene {
   cameraResizeNeeded: boolean;
   layerGround: any;
   marker: Phaser.GameObjects.Graphics | null;
+  capturedMarker: Phaser.GameObjects.Graphics | null;
   currentTile: Phaser.Tilemaps.Tile | null;
   currentLayer: Phaser.Tilemaps.DynamicTilemapLayer | Phaser.Tilemaps.StaticTilemapLayer | null;
 
@@ -37,6 +38,7 @@ export default class DungeonScene extends Phaser.Scene {
     this.player = null;
     this.tilemap = null;
     this.marker = null;
+    this.capturedMarker = null;
     this.map = null;
     this.currentTile = null;
     this.currentLayer = null;
@@ -151,6 +153,10 @@ export default class DungeonScene extends Phaser.Scene {
       this.marker.lineStyle(2, 0x000000, 1);
       this.marker.strokeRect(0, 0, tileSize, tileSize);
 
+      this.capturedMarker = this.add.graphics();
+      this.capturedMarker.lineStyle(2, 0xFF0000, 1);
+      this.capturedMarker.strokeRect(0, 0, tileSize, tileSize);
+
       this.input.keyboard.on("keydown_R", () => {
         this.scene.stop("InfoScene");
         this.scene.start("ReferenceScene");
@@ -192,13 +198,15 @@ export default class DungeonScene extends Phaser.Scene {
     const tiles = this.tilemap.getTilesWithinWorldXY(worldX, worldY, 0, 0, {}, this.cameras.main)
       .filter(t => /*lint*/this.currentLayer && t.layer.name == this.currentLayer.layer.name) || [];
 
-    if (this.marker && tiles.length) {
+    if (this.marker && this.capturedMarker && tiles.length) {
       this.marker.x = (tiles[tiles.length - 1].x * tileSize);
       this.marker.y = (tiles[tiles.length - 1].y * tileSize);
 
       if (this.input.mousePointer.isDown) {
         if (cursorKeys.shift && cursorKeys.shift.isDown) {
           this.currentTile = tiles[tiles.length - 1];
+          this.capturedMarker.x = (tiles[tiles.length - 1].x * tileSize);
+          this.capturedMarker.y = (tiles[tiles.length - 1].y * tileSize);
           console.log(this.currentTile);
         } else if (this.currentTile) {
           this.tilemap.putTileAt(this.currentTile, tiles[tiles.length - 1].x, tiles[tiles.length - 1].y);
