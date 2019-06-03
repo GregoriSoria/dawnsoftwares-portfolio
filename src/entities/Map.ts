@@ -1,6 +1,7 @@
 import Tile, { TileType } from "../entities/Tile";
 import DungeonFactory from "dungeon-factory";
 import Graphics from "../assets/Graphics";
+import { env } from "../env";
 
 interface DungeonFactoryOutput {
   tiles: Array<Array<{ type: string }>>;
@@ -12,7 +13,8 @@ export default class Map {
   public readonly width: number;
   public readonly height: number;
   public readonly tilemap: Phaser.Tilemaps.Tilemap;
-  public readonly wallLayer: Phaser.Tilemaps.StaticTilemapLayer;
+  public readonly groundLayer: Phaser.Tilemaps.DynamicTilemapLayer;
+  public readonly wallLayer: Phaser.Tilemaps.DynamicTilemapLayer | Phaser.Tilemaps.StaticTilemapLayer;
 
   public readonly startingX: number;
   public readonly startingY: number;
@@ -70,7 +72,7 @@ export default class Map {
       Graphics.environment.name
     );
 
-    const groundLayer = this.tilemap
+    this.groundLayer = this.tilemap
       .createBlankDynamicLayer("Ground", dungeonTiles, 0, 0)
       .randomize(
         0,
@@ -79,7 +81,7 @@ export default class Map {
         this.height,
         Graphics.environment.indices.floor.outer
       );
-    const wallLayer = this.tilemap.createBlankDynamicLayer(
+    this.wallLayer = this.tilemap.createBlankDynamicLayer(
       "Wall",
       dungeonTiles,
       0,
@@ -96,13 +98,15 @@ export default class Map {
           // } else {
           //   idx = randomTile(Tiles.World.Wall.Brown.Vertical);
           // }
-          wallLayer.putTileAt(tile.wallIndex(), x, y);
+          this.wallLayer.putTileAt(tile.wallIndex(), x, y);
         }
       }
     }
-    wallLayer.setCollisionBetween(0, 256);
-    this.tilemap.convertLayerToStatic(groundLayer);
-    this.wallLayer = this.tilemap.convertLayerToStatic(wallLayer);
+    this.wallLayer.setCollisionBetween(0, 256);
+    if (env.APP_ENV != 'DEV') {
+      this.tilemap.convertLayerToStatic(this.groundLayer);
+      this.wallLayer = this.tilemap.convertLayerToStatic(this.wallLayer);
+    }
   }
 
   tileAt(x: number, y: number): Tile | null {
