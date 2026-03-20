@@ -4,8 +4,8 @@ import Graphics from "../assets/Graphics";
 import Player from "../entities/Player";
 import Map from "../entities/Map";
 
-const worldTileHeight = 21;
-const worldTileWidth = 21;
+const worldTileHeight = 41;
+const worldTileWidth = 41;
 
 const tileSize = 16;
 
